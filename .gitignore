@@ -1,0 +1,6 @@
+app/lib/dist/*
+*.pyc
+var/downloads/*
+var/parts/*
+etc/*
+eggs/*

@@ -9,3 +9,15 @@ config['tipfy'] = {
 	],
 
 }
+
+
+config['agendatrends'] = {
+
+}
+
+
+config['agendatrends.output'] = {
+
+	'minify': False
+
+}

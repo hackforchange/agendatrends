@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
-"""URL definitions."""
+
+""" URL definitions. """
+
 from tipfy.routing import Rule
+from tipfy.routing import HandlerPrefix
 
 rules = [
-    Rule('/', name='hello-world', handler='agendatrends.handlers.HelloWorldHandler'),
-    Rule('/pretty', name='hello-world-pretty', handler='agendatrends.handlers.PrettyHelloWorldHandler'),
+
+	HandlerPrefix('agendatrends.handlers.', [
+	
+		Rule('/', name='landing', handler='main.Landing')
+	
+	])
 ]

@@ -13,16 +13,10 @@ from tipfy.handler import RequestHandler
 from tipfyext.jinja2 import Jinja2Mixin
 
 
-class HelloWorldHandler(RequestHandler):
+class HelloWorldHandler(RequestHandler, Jinja2Mixin):
+
     def get(self):
+
         """Simply returns a Response object with an enigmatic salutation."""
-        return Response('Hello, World!')
 
-
-class PrettyHelloWorldHandler(RequestHandler, Jinja2Mixin):
-    def get(self):
-        """Simply returns a rendered template with an enigmatic salutation."""
-        context = {
-            'message': 'Hello, World!',
-        }
-        return self.render_response('hello_world.html', **context)
+        return self.render_response('main/landing.html')

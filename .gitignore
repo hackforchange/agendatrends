@@ -4,3 +4,4 @@ var/downloads/*
 var/parts/*
 etc/*
 eggs/*
+bin/*

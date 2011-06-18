@@ -1,5 +1,5 @@
-application: my-app
-version: 1
+application: agendatrends
+version: 1-dev
 runtime: python
 api_version: 1
 
@@ -8,8 +8,8 @@ builtins:
 - datastore_admin: on
 - remote_api: on
 
-inbound_services:
-- warmup
+#inbound_services:
+#- warmup
 
 error_handlers:
 - file: templates/error_handlers/default_error.html
@@ -42,3 +42,4 @@ handlers:
 
 - url: /.*
   script: main.py
+  login: admin

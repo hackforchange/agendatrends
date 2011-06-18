@@ -6,3 +6,4 @@ var/parts/*
 etc/*
 eggs/*
 bin/*
+*.un~

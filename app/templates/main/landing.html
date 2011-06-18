@@ -1,5 +1,21 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<b>main landing!</b>
+
+<ul id="topics" class="topics">
+{% for topic in topics %}
+	<li class="hoverable"><a href="/topic/{{ topic }}">{{ topic }}</a></li>
+{% endfor %}
+</ul>
+	
+
+
 {% endblock %}
+
+{% block postsouth %}
+
+
+
+
+{% endblock %}
+

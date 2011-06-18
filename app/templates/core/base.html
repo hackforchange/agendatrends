@@ -16,8 +16,12 @@
 
 <body>
 
+	<div id="header">
+		<a href="/"><h1 id="logo">agendatrends.org</h1></a>
+	</div>
+
 	<!-- Content -->
-	<div id='wrapper'>
+	<div id="content">
 		{% block content %}<b>content!</b>{% endblock %}
 	</div>
 
@@ -27,6 +31,12 @@
 		{% include "snippets/__south.html" %}
 		{% block postsouth %}{% endblock %}
 	{% endblock %}
+
+	<div id="footer">
+
+		Footer!
+
+	</div>
 
 </body>
 </html>

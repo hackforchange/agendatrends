@@ -4,3 +4,79 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+
+@import "compass/css3";
+@import "compass/css3/gradient";
+
+@import "compass/typography";
+
+@import "compass/layout";
+
+$primary-red: #FF6751;
+$primary-green: #8CC63F;
+$primary-blue: #6D84FF;
+$link-blue: #007FC5;
+$dark-gray: #8C8C8C;
+$light-gray: #C4C4C4;
+$text-color: #333333;
+
+$header-height: 50px;
+$footer-height: 25px;
+
+$shadow-color: #CCCCCC;
+
+
+
+#header {
+	h1 {
+		background: url(/static/images/agendatrends-logo.png) center no-repeat;
+		margin-left: -1000px;
+		font-size: 48px;
+		border: 0px;
+	}
+
+	@include background-image(linear-gradient(#FFF,gray));
+	height: 50px;
+	border-bottom: 1px solid gray;
+	@include box-shadow(darken($shadow-color,40%) 0px -3px 1px);
+
+}
+
+#content {
+
+	height: 500px;
+
+}
+
+a {
+	color: $link-blue;
+}
+
+#container {
+	width: 100%;
+}
+
+.topics {
+	margin-top: 100px;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
+	width: 500px;
+
+	li {
+		border: 1px solid gray;
+		@include background-image(linear-gradient(#FFF,#D0D0D0,#FFF));
+		padding: 10px 0;
+	}
+	li.hover {
+		@include background-image(linear-gradient(#FFF,#A0A0A0,#FFF));
+
+	}
+}
+
+
+#footer {
+	@include sticky-footer(54px);
+	background: #C0C0C0;
+	color: #555555;
+}

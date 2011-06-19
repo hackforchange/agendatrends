@@ -2,6 +2,7 @@ from agendatrends.handlers import WebHandler
 from sunlightapi import sunlight, SunlightApiError
 
 import simplejson as json
+import random
 
 
 sunlight.apikey = 'e4d34e8391c44b7682915ababb408c65';
@@ -29,3 +30,21 @@ class ApiLegislatorHandler(WebHandler):
         }
 
         return json.dumps(sunlight._apicall('legislators.allForLatLong', params))
+
+
+class ApiRepMentionsHandler(WebHandler):
+
+    def get(self):
+        reps = self.request.args.get("reps").split(',')
+        
+        
+        return json.dumps( { "rep_mentions": map(self.convert_mentions, reps) })
+
+    def convert_mentions(self, rep):
+        return { "fec_id": rep,
+                 "mentions": int(random.gauss(10.0, 3.0))
+        }
+
+
+
+

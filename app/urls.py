@@ -18,6 +18,7 @@ rules = [
 		Rule('/topic/<path:filters>', name='topic', handler='main.TopicHandler'),
 		Rule('/api/topic/<path:filters>', name='api', handler='api.ApiTopicHandler'),
 		Rule('/api/legislators', name='api', handler='api.ApiLegislatorHandler'),
+        Rule('/api/rep_mentions', name='api', handler='api.ApiRepMentionsHandler'),
 		Rule('/dev/data', name='dev-data', handler='dev.DefaultData')
 	
 	])

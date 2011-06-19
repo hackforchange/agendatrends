@@ -116,8 +116,7 @@ function loadLegislatorsWithCoords(coords) {
 var legislators_g = null;
 function loadLegislators(legislators) {
     legislators_g = legislators;
-    var ulList = $("<ul></ul>");
-    $("#reps").empty().append(ulList);
+    $("#reps").empty();
     for ( var i = 0, len = legislators.length; i < len; ++i ) {
         var legislator = legislators[i].legislator;
         console.log(legislator);
@@ -129,12 +128,82 @@ function loadLegislators(legislators) {
                     "<tr><th>Chamber:</th><td>" + legislator['chamber'].titleize() + "</td></tr>" +
                     "</table></div>")
                 .tooltip({ position: "center right", relative: true});
-            var listItem = $("<li></li>").append(anchor);
-            ulList.append(listItem);
+            var listItem = $("<div class=\"rep\" id=\"" +  legislator['fec_id'] + "\"></div>")
+                .append(anchor)
+                .css({ top: (i*50) + "px" });
+            $("#reps").append(listItem);
 
         }
 
     }
+
+}
+
+
+var moved_g = false;
+function handleRepMentions(data) {
+    console.log(data);
+
+    var options = {
+        title: {
+            text: "Mentions"
+        },
+        xAxis: {
+            title: { 
+                text: null
+            },
+            labels: {
+                rotation: 0,
+                style: { color: "#FFF", fontSize: "10px" },
+                step: 2
+            },
+            categories: $.map(data.rep_mentions, function(rep) {
+                                return rep.fec_id;
+                                })
+
+        },
+        yAxis: {
+            title: "Mentions"
+        },
+        legend: {
+            enabled: false
+        },
+        chart: {
+            renderTo: 'map-viewer',
+            zoomType: 'x',
+            defaultSeriesType: 'bar'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Mentions',
+            data: $.map(data.rep_mentions, function(rep) {
+                    return rep.mentions;
+                    })
+        }]
+    };
+
+
+    if ( !moved_g ) {
+        $.each(data.rep_mentions, function(idx) {
+                $("#" + this.fec_id).animate({
+                    left: "+=30",
+                    top: "+=" + (idx * 75 + 75)
+                });
+        });
+        moved_g = true;
+    }
+
+
+    console.log(options);
+
+
+    var chart = new Highcharts.Chart(options);
+
+    $("#subscribe").slideDown('slow');
+
+
 
 }
 
@@ -158,12 +227,21 @@ client.getLocation({enableHighAccuracy: true}, function(err, position) {
 
 
 
-$(document).onload(function() {
-    $("#topic-input").click(function() {
-        $.getJSON('/api/rep
+$(document).ready(function() {
+    $("#topic-form").submit(function(e) {
+        $.getJSON('/api/rep_mentions', 
+            { reps: $.map( legislators_g, function(legislator, idx) {
+                return legislator.legislator.fec_id;
+                }).join(','),
+              topic: $("#search").val()
+            },
+            handleRepMentions
+        );
 
+        e.preventDefault();
+        return false;
 
-
+    });
 });
 
 	

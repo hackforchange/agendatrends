@@ -71,7 +71,6 @@ a {
 #wrapper {
 	margin-left:auto;
 	margin-right:auto;
-	width: 80%;
 }
 
 .topics {
@@ -118,9 +117,24 @@ a {
     position: absolute;
     top: 5px;
     left: 0px;
+    .rep {
+        position: absolute;
+    }
+}
 
+#subscribe {
+    display: none;
+    border: 20px solid #555555;
+    @include border-radius(30px, 30px);
+    width:  340px;
+    height: 40px;
+    margin-left: 50px;
+    float: left;
+    padding: 10px;
 
 }
+
+
 
 
 
@@ -157,17 +171,19 @@ a {
 		margin-left: -999999px;
 	}
 
-	input {
-		-webkit-appearance: textfield;
-		clear: both;
-		font-family: "Helvetica Neue", "arial", "sans-serif";
-		font-size: 18px;
-		font-weight: bold;
-		border: 3px solid #C0C0C0;
-		width: 325px;
-		height: 35px;
-		@include border-radius(5px);
-	}
+}
+
+
+input.singular {
+    -webkit-appearance: textfield;
+    clear: both;
+    font-family: "Helvetica Neue", "arial", "sans-serif";
+    font-size: 18px;
+    font-weight: bold;
+    border: 3px solid #C0C0C0;
+    width: 325px;
+    height: 35px;
+    @include border-radius(5px);
 }
 
 

@@ -1,0 +1,65 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<head>
+	<!-- North -->
+	{% block north %}
+		{% block prenorth %}{% endblock %}
+		{% include "snippets/__north.html" %}
+		{% block postnorth %}{% endblock %}
+	{% endblock %}
+</head>
+
+<body>
+
+<<<<<<< HEAD
+	<div id="header">
+		<a href="/"><h1 id="logo">agendatrends.org</h1></a>
+	</div>
+
+	<!-- Content -->
+	<div id="content">
+		{% block content %}<b>content!</b>{% endblock %}
+	</div>
+
+	<!-- South -->
+	{% block south %}
+		{% block presouth %}{% endblock %}
+		{% include "snippets/__south.html" %}
+		{% block postsouth %}{% endblock %}
+	{% endblock %}
+
+	<div id="footer">
+
+=======
+	<div id='wrapper'>
+
+		<header>
+			{% include "snippets/header.html" %}
+		</header>
+
+		<!-- Content -->
+		<div id="content">
+			{% block content %}<b>content!</b>{% endblock %}
+		</div>
+
+		<!-- South -->
+		{% block south %}
+			{% block presouth %}{% endblock %}
+			{% include "snippets/__south.html" %}
+			{% block postsouth %}{% endblock %}
+		{% endblock %}
+
+		<footer>
+			{% include "snippets/footer.html" %}
+		</footer>
+>>>>>>> c2ce80b61f668080fbdf569acd43913c4b9e7eb1
+
+	</div>
+
+</body>
+</html>

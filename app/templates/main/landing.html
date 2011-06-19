@@ -2,11 +2,31 @@
 
 {% block content %}
 
+
+<div id="map-and-reps">
+    <div id="map-viewer">
+
+    </div>
+    <div id="reps"></div>
+</div>
+
+<div id="topic-form">
+	<form>
+		<label id="topic-label" for="topic"></label>
+		<input id="topic" type="text" name="topic" placeholder="[topic] eg: healthcare, weiner"/>
+	</form>
+</div>
+
+
+
+
+<!--
 <ul id="topics" class="topics">
 {% for topic in topics %}
 	<li class="hoverable"><a href="/topic/{{ topic }}">{{ topic }}</a></li>
 {% endfor %}
 </ul>
+-->
 	
 
 
@@ -14,6 +34,134 @@
 
 {% block postsouth %}
 
+<script type="text/javascript">
+	var mapStyles =
+[
+  {
+    featureType: "administrative",
+    elementType: "labels",
+    stylers: [
+      { visibility: "off" }
+    ]
+  },{
+    featureType: "landscape",
+    elementType: "all",
+    stylers: [
+      { visibility: "simplified" }
+    ]
+  },{
+    featureType: "road",
+    elementType: "all",
+    stylers: [
+      { visibility: "off" }
+    ]
+  },{
+    featureType: "poi",
+    elementType: "all",
+    stylers: [
+      { visibility: "off" }
+    ]
+  },{
+    featureType: "transit",
+    elementType: "all",
+    stylers: [
+      { visibility: "off" }
+    ]
+  },{
+    featureType: "all",
+    elementType: "all",
+    stylers: [
+
+    ]
+  }
+];
+
+	function initializeWithCoords(coords) {
+		var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+		var mapType = new google.maps.StyledMapType(
+				mapStyles
+				);
+
+		var options = {
+			zoom: 5,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			disableDefaultUI: true
+		};
+		var map = new google.maps.Map(document.getElementById("map-viewer"), options);
+
+		map.mapTypes.set('myMapStyle', mapType);
+		map.setMapTypeId('myMapStyle');
+
+
+		
+
+
+	}
+
+	function loadLegislatorsWithCoords(coords) {
+		$.getJSON('/api/legislators', 
+				{ 
+			      'latitude': coords.latitude,
+				  'longitude': coords.longitude 
+				},
+			function(data) {
+                loadLegislators(data.legislators);
+            }
+        );
+    }
+
+
+    function loadLegislators(legislators) {
+        var ulList = $("<ul></ul>");
+        $("#reps").empty().append(ulList);
+        for ( var i = 0, len = legislators.length; i < len; ++i ) {
+            var legislator = legislators[i].legislator;
+            console.log(legislator);
+            if ( legislator['facebook_id'] !== undefined ) {
+                
+                var anchor = $("<a href=\"" + legislator['website'] + "\"><img src=\"http://graph.facebook.com/" + legislator['facebook_id'] + "/picture\"/></a>" +
+                        "<div class=\"tooltip\"><table>" +
+                        "<tr><th>Name:</th><td>" + legislator['firstname'] + " " + legislator['lastname'] + "</td>" +
+                        "<tr><th>Chamber:</th><td>" + legislator['chamber'].titleize() + "</td></tr>" +
+                        "</table></div>")
+                    .tooltip({ position: "center right", relative: true});
+                var listItem = $("<li></li>").append(anchor);
+                ulList.append(listItem);
+
+            }
+
+        }
+
+    }
+
+
+
+
+	var client = new simplegeo.ContextClient('VsTU8grV92mP6NZMbwtdyQ8mNh7MyUQw');
+
+	client.getLocation({enableHighAccuracy: true}, function(err, position) {
+			if (err) {
+				// could not retrieve location
+				console.log("ERROR");
+			} else {
+				console.log(position);
+				initializeWithCoords(position.coords);
+				loadLegislatorsWithCoords(position.coords);
+			}
+
+
+	});
+
+
+
+
+	
+
+			
+
+
+</script>
 
 
 

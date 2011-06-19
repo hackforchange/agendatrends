@@ -9,11 +9,45 @@ class Topic(object):
 		return ['libya', 'taxes', 'unemployment']
 
 
+	@classmethod
+	def filterWith(cls, topic_filters):
+		result = "/%s%s" % (topic_filters.topic, topic_filters.filteredUrl())
+		logging.info(result)
+		return result
+
+
+
+
 class TopicFilters(object):
 
 	def __init__(self, filters):
 		self.all_filters = filters.split('/')
 		self.topic = self.all_filters[0]
+
+		self.applied_filters = {}
+		for i in range(1, len(self.all_filters), 2):
+			topic = self.all_filters[i]
+			topic_value = self.all_filters[i+1]
+			self.applied_filters.setdefault(topic, []).append(topic_value)
+
+	
+	def __get__(self, key):
+		return self.applied_filters[key]
+
+
+	def keys(self):
+		return self.applied_filters.keys()
+
+	def filteredUrl(self):
+		baseUrl = "/"
+
+		for key in self.applied_filters.keys():
+			baseUrl = "/" + key + "/"
+			baseUrl += ("/" + key + "/").join(self.applied_filters[key])
+		
+		return baseUrl
+
+
 
 
 

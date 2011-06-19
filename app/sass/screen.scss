@@ -35,7 +35,7 @@ $shadow-color: #CCCCCC;
 		border: 0px;
 	}
 
-	@include background-image(linear-gradient(#FFF,gray));
+	@include background-image(linear-gradient(#FFF,#C0C0C0));
 	height: 50px;
 	border-bottom: 1px solid gray;
 	@include box-shadow(darken($shadow-color,40%) 0px -3px 1px);
@@ -73,6 +73,84 @@ a {
 
 	}
 }
+
+#results-feed {
+	h3 {
+		padding-left: 2em;
+	}
+	div {
+		height: 100px;
+		overflow-y: auto;
+	}
+
+	height: 300px;
+}
+
+#map-and-reps {
+	border: 20px solid #555555;
+	@include border-radius(30px, 30px);
+	width: 450px;
+	height: 450px;
+	margin-left: 15%;
+	float: left;
+    position: relative;
+}
+
+#reps {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+
+
+}
+
+
+
+#map-viewer {
+    width: 450px;
+    height: 450px;
+}
+
+.tooltip {
+    display: none;
+    background: url(/static/images/black.png) no-repeat;
+    height: 109px;
+    padding: 20px 10px 10px 20px;
+    width: 209px;
+    font-size: 11px;
+    color: #FFF;
+
+    label {
+        font-weight: bold;
+    }
+}
+
+#topic-form {
+	float: left;
+	border: 20px solid #555555;
+	@include border-radius(20px, 20px);
+	margin-top: 175px;
+	margin-left: -15px;
+	padding: 25px;
+
+	label {
+		clear: both;
+		display: block;
+		margin-left: -999999px;
+	}
+
+	input {
+		clear: both;
+		font-family: "Helvetica Neue", "arial", "sans-serif";
+		font-size: 18px;
+		font-weight: bold;
+		border: 3px solid #C0C0C0;
+		width: 325px;
+		height: 24px;
+		@include border-radius(5px);
+	}
+}
+
 
 
 #footer {

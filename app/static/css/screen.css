@@ -70,11 +70,11 @@ footer, header, hgroup, menu, nav, section {
 
 /* line 30, ../../sass/screen.scss */
 #header {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #808080));
-  background-image: -webkit-linear-gradient(#ffffff, #808080);
-  background-image: -moz-linear-gradient(#ffffff, #808080);
-  background-image: -o-linear-gradient(#ffffff, #808080);
-  background-image: linear-gradient(#ffffff, #808080);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #c0c0c0));
+  background-image: -webkit-linear-gradient(#ffffff, #c0c0c0);
+  background-image: -moz-linear-gradient(#ffffff, #c0c0c0);
+  background-image: -o-linear-gradient(#ffffff, #c0c0c0);
+  background-image: linear-gradient(#ffffff, #c0c0c0);
   height: 50px;
   border-bottom: 1px solid gray;
   -moz-box-shadow: #666666 0px -3px 1px;
@@ -132,7 +132,102 @@ a {
   background-image: linear-gradient(#ffffff, #a0a0a0, #ffffff);
 }
 
+/* line 77, ../../sass/screen.scss */
+#results-feed {
+  height: 300px;
+}
 /* line 78, ../../sass/screen.scss */
+#results-feed h3 {
+  padding-left: 2em;
+}
+/* line 81, ../../sass/screen.scss */
+#results-feed div {
+  height: 100px;
+  overflow-y: auto;
+}
+
+/* line 89, ../../sass/screen.scss */
+#map-and-reps {
+  border: 20px solid #555555;
+  -webkit-border-radius: 30px 30px;
+  -moz-border-radius: 30px / 30px;
+  -o-border-radius: 30px / 30px;
+  -ms-border-radius: 30px / 30px;
+  -khtml-border-radius: 30px / 30px;
+  border-radius: 30px / 30px;
+  width: 450px;
+  height: 450px;
+  margin-left: 15%;
+  float: left;
+  position: relative;
+}
+
+/* line 99, ../../sass/screen.scss */
+#reps {
+  position: absolute;
+  top: 5px;
+  left: 0px;
+}
+
+/* line 109, ../../sass/screen.scss */
+#map-viewer {
+  width: 450px;
+  height: 450px;
+}
+
+/* line 114, ../../sass/screen.scss */
+.tooltip {
+  display: none;
+  background: url(/static/images/black.png) no-repeat;
+  height: 109px;
+  padding: 20px 10px 10px 20px;
+  width: 209px;
+  font-size: 11px;
+  color: #FFF;
+}
+/* line 123, ../../sass/screen.scss */
+.tooltip label {
+  font-weight: bold;
+}
+
+/* line 128, ../../sass/screen.scss */
+#topic-form {
+  float: left;
+  border: 20px solid #555555;
+  -webkit-border-radius: 20px 20px;
+  -moz-border-radius: 20px / 20px;
+  -o-border-radius: 20px / 20px;
+  -ms-border-radius: 20px / 20px;
+  -khtml-border-radius: 20px / 20px;
+  border-radius: 20px / 20px;
+  margin-top: 175px;
+  margin-left: -15px;
+  padding: 25px;
+}
+/* line 136, ../../sass/screen.scss */
+#topic-form label {
+  clear: both;
+  display: block;
+  margin-left: -999999px;
+}
+/* line 142, ../../sass/screen.scss */
+#topic-form input {
+  clear: both;
+  font-family: "Helvetica Neue", "arial", "sans-serif";
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid #C0C0C0;
+  width: 325px;
+  height: 24px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 156, ../../sass/screen.scss */
 #footer {
   background: #C0C0C0;
   color: #555555;

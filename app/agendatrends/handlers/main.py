@@ -49,9 +49,6 @@ class TopicFilters(object):
 
 
 
-
-
-
 class LandingHandler(WebHandler):
 
     def get(self):

@@ -1,7 +1,7 @@
 from agendatrends.handlers import WebHandler
 from sunlightapi import sunlight, SunlightApiError
 
-import json
+import simplejson as json
 
 
 sunlight.apikey = 'e4d34e8391c44b7682915ababb408c65';
@@ -29,7 +29,3 @@ class ApiLegislatorHandler(WebHandler):
         }
 
         return json.dumps(sunlight._apicall('legislators.allForLatLong', params))
-
-
-
-

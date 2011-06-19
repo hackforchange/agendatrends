@@ -1,0 +1,1 @@
+from agendatrends.handlers import WebHandler

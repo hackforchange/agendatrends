@@ -14,24 +14,21 @@ class SunlightPipeline(ServicePipeline):
 		'api_key': '5716fd8eb1ce418095fe402c7489281e'
 	
 	}
-
-
-class SunlightLegislators(SunlightPipeline):
-
-	def run(self):
-		sunlight.apikey = self.config['api_key']
 		
-	
+
 	
 class SunlightLegislator(SunlightPipeline):
 
-	def run(self, **kwargs):
-		sunlight.apikey = self.config['api_key']
+	def run(self, legislator=False, **kwargs):
 		
-		## Get legislator
-		legislator = sunlight.legislators.get(**kwargs)
+		if legislator is False:
 		
-		logging.info('Getting legislator by ID: '+str(legislator.fec_id))
+			sunlight.apikey = self.config['api_key']
+		
+			## Get legislator
+			legislator = sunlight.legislators.get(**kwargs)
+		
+			logging.info('Getting legislator by ID: '+str(legislator.fec_id))
 		
 		l = Legislator(key_name=legislator.fec_id)
 		
@@ -44,3 +41,16 @@ class SunlightLegislator(SunlightPipeline):
 		logging.info('Put legislator: '+str(legislator.fec_id)+' at key '+str(l_key))
 		
 		return str(l_key)
+		
+		
+class SunlightLegislators(SunlightPipeline):
+
+	def run(self, **kwargs):
+		sunlight.apikey = self.config['api_key']
+
+		## Get legislators
+		legislators = sunlight.legislators.getList(**kwargs)
+
+		## Spawn legislator pipelines
+		for legislator in legislators:
+			yield SunlightLegislator(legislator=legislator.__dict__)

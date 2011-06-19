@@ -1,7 +1,14 @@
+import re
+import urllib
+import httplib
 import logging
+import simplejson as json
+
+from StringIO import StringIO
+
 from agendatrends.pipelines.services import ServicePipeline
 
-
+## === Analyze URL or blob with OpenCalais === ##
 class OpenCalaisIdentify(ServicePipeline):
 
 	config = {
@@ -11,12 +18,11 @@ class OpenCalaisIdentify(ServicePipeline):
 	
 	}
 	
-
 	def run(self, url):
 		
-		from calais import Calais
+		from calaislib import Calais
 		c = Calais(self.config['api_key'], submitter=self.config['submitter'])
 		
 		object_result = c.analyze_url(url)
 		
-		logging.info(str(object_result))
+		self.memcache.set('object_result', object_result)

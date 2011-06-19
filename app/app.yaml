@@ -1,5 +1,5 @@
 application: agendatrends
-version: 1-dev
+version: 2-dev
 runtime: python
 api_version: 1
 

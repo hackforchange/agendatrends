@@ -39,7 +39,7 @@ class WebHandler(RequestHandler, Jinja2Mixin):
 			elif content_type == 'text/css':
 				output_filter = slimmer.css_slimmer		
 		
-		return self.response(output_filter(self.render_template(template, **context)))
+		return self.response(output_filter(self.render_template(template, **template_context)))
 		
 
 	def generateBaseContext(self):

@@ -16,25 +16,27 @@
 
 <body>
 
-	<div id="header">
-		<a href="/"><h1 id="logo">agendatrends.org</h1></a>
-	</div>
+	<div id='wrapper'>
 
-	<!-- Content -->
-	<div id="content">
-		{% block content %}<b>content!</b>{% endblock %}
-	</div>
+		<header>
+			{% include "snippets/header.html" %}
+		</header>
 
-	<!-- South -->
-	{% block south %}
-		{% block presouth %}{% endblock %}
-		{% include "snippets/__south.html" %}
-		{% block postsouth %}{% endblock %}
-	{% endblock %}
+		<!-- Content -->
+		<div id="content">
+			{% block content %}<b>content!</b>{% endblock %}
+		</div>
 
-	<div id="footer">
+		<!-- South -->
+		{% block south %}
+			{% block presouth %}{% endblock %}
+			{% include "snippets/__south.html" %}
+			{% block postsouth %}{% endblock %}
+		{% endblock %}
 
-		Footer!
+		<footer>
+			{% include "snippets/footer.html" %}
+		</footer>
 
 	</div>
 

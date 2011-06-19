@@ -34,29 +34,33 @@ http://ajax.googleapis.com/ajax/services/search/news?v=1.0
 <![CDATA[
   var articles = [];
   var url = 'http://ajax.googleapis.com/ajax/services/search/news?v=1.0&rsz=8&q=' + inputs['q'];
-  var data = y.rest(url).get().response;         
-  var res_asjson = eval('(' + data + ')');         
-//  y.log(res_asjson.responseData);
-  for (i=0; i<res_asjson.responseData.results.length; i++)
-  {    
-    var art = {};
-    art.url = res_asjson.responseData.results[i].unescapedUrl;
-    art.publisher = res_asjson.responseData.results[i].publisher;
-    art.date = res_asjson.responseData.results[i].publishedDate;
-    articles.push(art);
-  }
-  var num_pages = res_asjson.responseData.cursor.pages.length;
-  if (num_pages > 1)
-  {
-    var subq = y.query("select unescapedUrl, publisher, publishedDate from google.news where rsz='8' and start='8' and q='" + inputs['q'] + "'");
-    var subres = y.xmlToJson(subq.results).results.results; 
-    for (i=0; i<subres.length; i++)
-    {
-      articles.push(subres[i]);
+  var num_pages = 0;
+  var estimatedResultCount = 0;
+  fetchFromGoogNews(0);
+  
+  response.object = {"articles":articles, "estimatedResultCount":estimatedResultCount};
+  
+  function fetchFromGoogNews(start) { //recursion ftw
+    var data = y.rest(url+"&start="+start).get().response;         
+    var res_asjson = eval('(' + data + ')');             
+    for (i=0; i<res_asjson.responseData.results.length; i++)
+    {    
+      var art = {};
+      art.url = res_asjson.responseData.results[i].unescapedUrl;
+      art.publisher = res_asjson.responseData.results[i].publisher;
+      art.date = res_asjson.responseData.results[i].publishedDate;
+      articles.push(art);
+    }
+    if (start == 0) {
+      estimatedResultCount = res_asjson.responseData.cursor.estimatedResultCount;
+      num_pages = res_asjson.responseData.cursor.pages.length;
+      if (num_pages > 1)
+      {
+        fetchFromGoogNews(8);
+      }
     }
   }
-  //y.log('estimated total: ' + res_asjson.responseData.cursor.estimatedResultCount);
-  response.object = {"articles":articles, estimatedResultCount:res_asjson.responseData.cursor.estimatedResultCount};
+  
 ]]>
 </execute>
 </select>

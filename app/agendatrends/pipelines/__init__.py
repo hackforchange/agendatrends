@@ -18,6 +18,7 @@ from pipeline import pipeline
 from google.appengine.ext import db
 from google.appengine.api import xmpp
 from google.appengine.api import channel
+from google.appengine.api import urlfetch
 from google.appengine.api import memcache
 from google.appengine.api import taskqueue
 
@@ -31,6 +32,7 @@ class AgendaTrendsPipeline(pipeline.Pipeline):
 	db = db
 	_opts = {}
 	memcache = memcache
+	urlfetch = urlfetch
 	taskqueue = taskqueue
 	pipeline = pipeline
 	common = common

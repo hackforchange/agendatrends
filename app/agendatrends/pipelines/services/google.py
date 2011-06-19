@@ -59,6 +59,7 @@ class NewsForQuery(ServicePipeline):
 		articles = self.db.put(articles)
 		for article in articles:
 			logging.info('PUT ARTICLE: '+str(article))
+			o = OpenCalaisIdentity(str(article)).start(queue_name='data')
 			
 
 		return str(articles)

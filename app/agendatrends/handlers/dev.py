@@ -29,4 +29,4 @@ class FillDatastore(WebHandler):
 		for state in states:
 			pipelines.append(SunlightLegislators(state=state.key().name()).start(queue_name='data'))
 			
-		return self.response(reduce(lambda x, y: x+y, ['<li>Started pipeline <b>'+str(pipeline)+'</b></li>']))
+		return self.response(reduce(lambda x, y: x+y, ['<li>Started pipeline <b>'+str(pipeline)+'</b></li>' for pipeline in pipelines]))

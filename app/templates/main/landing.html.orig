@@ -14,19 +14,15 @@
     <div id="reps"></div>
 </div>
 
-<div>
-    <form id="zip-form">
-        <input id="zipcode" class="singular" name="zipcode" placeholder="[zipcode]" />
-    </form>
-	<form id="topic-form">
+<div id="topic-form">
+	<form>
 		<label id="topic-label" for="topic"></label>
-		<input id="search" type="search" name="topic" class="singular" placeholder="[topic] eg: healthcare, penis" x-webkit-speech autofocus/>
+<<<<<<< HEAD
+		<input id="topic-input" type="text" name="topic" placeholder="[topic] eg: healthcare, weiner"/>
+=======
+		<input id="topic" type="search" name="topic" placeholder="[topic] eg: healthcare, weiner" x-webkit-speech/>
+>>>>>>> c2ce80b61f668080fbdf569acd43913c4b9e7eb1
 	</form>
-    <div id="subscribe">
-        <form id="subscribe-form">
-            <input id="subscribe-input" class="singular" type="email" name="subscribe" placeholder="[subscribe to this topic]" />
-        </form>
-    </div>
 </div>
 
 <!--

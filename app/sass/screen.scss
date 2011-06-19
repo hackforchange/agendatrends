@@ -15,7 +15,7 @@
 $primary-red: #FF6751;
 $primary-green: #8CC63F;
 $primary-blue: #6D84FF;
-$link-blue: #007FC5;
+$link-blue: #800B07;
 $dark-gray: #8C8C8C;
 $light-gray: #C4C4C4;
 $text-color: #333333;
@@ -24,6 +24,14 @@ $header-height: 50px;
 $footer-height: 25px;
 
 $shadow-color: #CCCCCC;
+
+body {
+    font-family:"Lucida Grande","Lucida Sans Unicode",arial,sans-serif;
+}
+h2, h3 {
+    font-family:Candara,georgia,serif;
+}
+
 
 header {
 
@@ -36,8 +44,9 @@ header {
 	}
 	
 	nav {
-		margin-top:21px;
+		margin-top:16px;
 		float:left;
+        margin-left: 75px;
 		ul {
 			list-style:none;
 			display:inline;
@@ -63,6 +72,11 @@ header {
 	height: 50px;
 	border-bottom: 1px solid gray;
 	@include box-shadow(darken($shadow-color,40%) 0px -3px 1px);
+
+    a:visited {
+        color: $link-blue;
+    }
+
 
 }
 
@@ -127,9 +141,25 @@ a {
     position: absolute;
     top: 5px;
     left: 0px;
+    .rep {
+        position: absolute;
+    }
+}
 
+#subscribe {
+    display: none;
+    border: 20px solid #555555;
+    @include border-radius(30px, 30px);
+    width:  340px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -10px;
+    float: left;
+    padding: 10px;
 
 }
+
+
 
 
 
@@ -152,13 +182,22 @@ a {
     }
 }
 
+#zip-form {
+    float: left;
+    margin-top: 50px;
+    margin-left: -20px;
+	border: 20px solid #555555;
+	@include border-radius(20px, 20px);
+    padding: 10px;
+}
+
+
 #topic-form {
 	float: left;
 	border: 20px solid #555555;
+    margin-left: -20px;
 	@include border-radius(20px, 20px);
-	margin-top: 100px;
-	margin-left: -20px;
-	padding: 25px;
+    padding: 10px;
 
 	label {
 		clear: both;
@@ -166,17 +205,19 @@ a {
 		margin-left: -999999px;
 	}
 
-	input {
-		-webkit-appearance: textfield;
-		clear: both;
-		font-family: "Helvetica Neue", "arial", "sans-serif";
-		font-size: 18px;
-		font-weight: bold;
-		border: 3px solid #C0C0C0;
-		width: 325px;
-		height: 35px;
-		@include border-radius(5px);
-	}
+}
+
+
+input.singular {
+    -webkit-appearance: textfield;
+    clear: both;
+    font-family: "Helvetica Neue", "arial", "sans-serif";
+    font-size: 18px;
+    font-weight: bold;
+    border: 3px solid #C0C0C0;
+    width: 325px;
+    height: 35px;
+    @include border-radius(0px);
 }
 
 

@@ -1,7 +1,13 @@
+import os
 import sys
 
-if 'lib' not in sys.path:
-	sys.path.insert(1, 'lib')
+current_path = os.path.abspath(os.path.dirname(__file__))
+
+sys.path[0:0] = [
+    os.path.join(current_path, 'lib'),
+    os.path.join(current_path, 'lib', 'dist'),
+    os.path.join(current_path, 'lib', 'dist.zip'),
+]
 
 import config
 import logging

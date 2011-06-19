@@ -57,6 +57,7 @@ function initializeWithCoords(coords) {
     map.mapTypes.set('myMapStyle', mapType);
     map.setMapTypeId('myMapStyle');
 */
+    $("#map-viewer").empty();
 
     var po = org.polymaps;
 
@@ -122,12 +123,8 @@ function loadLegislators(legislators) {
         console.log(legislator);
         if ( legislator['facebook_id'] !== undefined ) {
             
-            var anchor = $("<a href=\"" + legislator['website'] + "\"><img src=\"http://graph.facebook.com/" + legislator['facebook_id'] + "/picture\"/></a>" +
-                    "<div class=\"tooltip\"><table>" +
-                    "<tr><th>Name:</th><td>" + legislator['firstname'] + " " + legislator['lastname'] + "</td>" +
-                    "<tr><th>Chamber:</th><td>" + legislator['chamber'].titleize() + "</td></tr>" +
-                    "</table></div>")
-                .tooltip({ position: "center right", relative: true});
+            var anchor = $("<a href=\"" + legislator['website'] + "\" title=\"" + legislator['firstname'] + " " + legislator['lastname'] + "\"><img src=\"http://graph.facebook.com/" + legislator['facebook_id'] + "/picture\"/></a>")
+                .tipsy({ gravity: 'w' });
             var listItem = $("<div class=\"rep\" id=\"" +  legislator['fec_id'] + "\"></div>")
                 .append(anchor)
                 .css({ top: (i*50) + "px" });
@@ -202,15 +199,14 @@ function handleRepMentions(data) {
     var chart = new Highcharts.Chart(options);
 
     $("#subscribe").slideDown('slow');
-
-
-
+    $("#subscribe-input").focus();
 }
 
 
 
 
 var client = new simplegeo.ContextClient('VsTU8grV92mP6NZMbwtdyQ8mNh7MyUQw');
+var placesClient = new simplegeo.PlacesClient('VsTU8grV92mP6NZMbwtdyQ8mNh7MyUQw');
 
 client.getLocation({enableHighAccuracy: true}, function(err, position) {
         if (err) {
@@ -240,8 +236,36 @@ $(document).ready(function() {
 
         e.preventDefault();
         return false;
-
     });
+    $("#zip-form").submit(function(e) {
+        placesClient.searchFromAddress($("#zipcode").val(), function(err, data) {
+            if ( err ) {
+                console.error(err);
+            } else {
+                if ( data.features.length > 0 ) {
+                    var coordinatesArray = data.features[0].geometry.coordinates;
+                    var coordinates = { latitude: coordinatesArray[1], longitude: coordinatesArray[0] }
+                    initializeWithCoords( coordinates );
+                    loadLegislatorsWithCoords( coordinates );
+                    moved_g = false;
+                }
+
+            }
+        });
+        e.preventDefault();
+        return false;
+    });
+    $("#subscribe-form").submit(function(e) {
+        console.log("blah");
+        e.preventDefault();
+        var dialog = $("<div>Subscribed you to " + $("#search").val() + " topic</div>");
+
+        alert("Subscribed you to " + $("#search").val() + " topic");
+        return false;
+    });
+
+
+
 });
 
 	

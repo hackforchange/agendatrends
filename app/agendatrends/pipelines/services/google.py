@@ -49,7 +49,7 @@ class NewsForQuery(ServicePipeline):
 				a = NewsArticle(key_name=unescapedUrl)
 				a.url = unescapedUrl
 				a.source = source
-				#a.published = datetime.datetime.strptime(date, '%a %d %b %Y %I:%M:%S %z')
+				a.published = datetime.datetime.strptime(date[0:-6], '%a, %d %b %Y %I:%M:%S')
 				articles.append(a)
 			
 				logging.info('URL for article %s: %s' % (query, unescapedUrl))

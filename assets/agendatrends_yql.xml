@@ -1,0 +1,64 @@
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+<meta>
+<author>Martin Borho</author>
+<documentationURL>
+http://code.google.com/apis/ajaxsearch/documentation/
+</documentationURL>
+<sampleQuery>select * from {table} where q = "new york"</sampleQuery>
+<sampleQuery>select * from {table} where topic = "h"</sampleQuery>
+</meta>
+<bindings>
+<select itemPath="" produces="JSON">
+<urls>
+<url>
+http://ajax.googleapis.com/ajax/services/search/news?v=1.0
+</url>
+</urls>
+<paging model="offset">
+<start id="start" default="0"/>
+<pagesize id="size" max="4"/>
+<total default="4"/>
+</paging>
+<inputs>
+<key id="q" type="xs:string" paramType="query"/>
+<key id="topic" type="xs:string" paramType="query"/>
+<key id="ned" type="xs:string" paramType="query" required="false" default="us"/>
+<key id="geo" type="xs:string" paramType="query"/>
+<key id="key" type="xs:string" paramType="query"/>
+<key id="rsz" type="xs:string" paramType="query"/>
+<key id="scoring" type="xs:string" paramType="query"/>
+<key id="start" type="xs:string" paramType="query"/>
+<key id="userip" type="xs:string" paramType="query"/>
+</inputs>
+<execute>
+<![CDATA[
+  var articles = [];
+  var url = 'http://ajax.googleapis.com/ajax/services/search/news?v=1.0&rsz=8&q=' + inputs['q'];
+  var data = y.rest(url).get().response;         
+  var res_asjson = eval('(' + data + ')');         
+//  y.log(res_asjson.responseData);
+  for (i=0; i<res_asjson.responseData.results.length; i++)
+  {    
+    var art = {};
+    art.url = res_asjson.responseData.results[i].unescapedUrl;
+    art.publisher = res_asjson.responseData.results[i].publisher;
+    art.date = res_asjson.responseData.results[i].publishedDate;
+    articles.push(art);
+  }
+  var num_pages = res_asjson.responseData.cursor.pages.length;
+  if (num_pages > 1)
+  {
+    var subq = y.query("select unescapedUrl, publisher, publishedDate from google.news where rsz='8' and start='8' and q='" + inputs['q'] + "'");
+    var subres = y.xmlToJson(subq.results).results.results; 
+    for (i=0; i<subres.length; i++)
+    {
+      articles.push(subres[i]);
+    }
+  }
+  //y.log('estimated total: ' + res_asjson.responseData.cursor.estimatedResultCount);
+  response.object = {"articles":articles, estimatedResultCount:res_asjson.responseData.cursor.estimatedResultCount};
+]]>
+</execute>
+</select>
+</bindings>
+</table>

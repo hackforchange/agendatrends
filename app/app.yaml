@@ -3,14 +3,61 @@ version: 1-dev
 runtime: python
 api_version: 1
 
+#### ===== Files to Skip
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?tests$
+
+
+#### ===== Builtin SDK Includes
 builtins:
 - appstats: on
-- datastore_admin: on
+- deferred: on
 - remote_api: on
+- admin_redirect: on
+- datastore_admin: on
 
-#inbound_services:
-#- warmup
 
+#### ===== Incoming Services
+inbound_services:
+- mail
+- xmpp_message
+- xmpp_presence
+- xmpp_subscribe
+- warmup
+
+
+#### ===== Force precompilation
+derived_file_type:
+- python_precompiled
+
+
+#### ===== Custom Admin Pages
+admin_console:
+  pages:
+  - name: Developer's Console
+    url: /_fcm/dev
+  - name: Management Console
+    url: /_fcm/manage
+  - name: Platform Console
+    url: /_pc/console
+  - name: Map/Reduce
+    url: /_ah/mapreduce/
+  - name: Pipelines
+    url: /_ah/pipeline/status
+  - name: AppStats
+    url: /_ah/appstats
+    
+
+#### ===== Static error handlers
 error_handlers:
 - file: templates/error_handlers/default_error.html
 
@@ -23,6 +70,8 @@ error_handlers:
 - error_code: timeout
   file: templates/error_handlers/timeout.html
 
+
+#### ===== Handlers! :)
 handlers:
 - url: /favicon\.ico
   static_files: static/favicon.ico
@@ -39,7 +88,48 @@ handlers:
 - url: /_ah/queue/deferred
   script: main.py
   login: admin
+  
+# HTML5 Appcache Manifest
+- url: /(.*\.(appcache|manifest))
+  mime_type: text/cache-manifest
+  static_files: static/appcache/\1
+  upload: static/(.*\.(appcache|manifest))
+  expiration: "0m"
 
+# Chrome Extensions
+- url: /(.*\.crx)
+  mime_type: application/x-chrome-extension
+  static_files: static/\1
+  upload: static/(.*\.crx)
+
+# Fonts
+- url: /(.*\.woff)
+  mime_type: application/x-font-woff
+  static_files: static/fonts/\1
+  upload: static/(.*\.woff)  
+
+- url: /_ah/appstats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+  login: admin
+  auth_fail_action: unauthorized
+
+- url: /_ah/mapreduce.*
+  script: $PYTHON_LIB/google/appengine/ext/mapreduce/main.py
+  login: admin
+  auth_fail_action: unauthorized
+
+- url: /_ah/pipeline(/.*)?
+  script: pipeline/handlers.py
+  login: admin
+  auth_fail_action: unauthorized
+
+###### API Requests go to the services gateway
+- url: /_api/rpc.*
+  script: services.py
+  login: required
+  auth_fail_action: unauthorized
+
+###### Web requests go to Tipfy
 - url: /.*
   script: main.py
   login: admin

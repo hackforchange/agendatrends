@@ -25,14 +25,24 @@ $footer-height: 25px;
 
 $shadow-color: #CCCCCC;
 
-
-
-#header {
+header {
 	h1 {
-		background: url(/static/images/agendatrends-logo.png) center no-repeat;
-		margin-left: -1000px;
+		float:left;
+		width:175px;
 		font-size: 48px;
 		border: 0px;
+	}
+	
+	nav {
+		float:left;
+		ul {
+			list-style:none;
+			display:inline;
+			li {
+				list-style:none;
+				display:inline;
+			}
+		}
 	}
 
 	@include background-image(linear-gradient(#FFF,#C0C0C0));
@@ -44,7 +54,9 @@ $shadow-color: #CCCCCC;
 
 #content {
 
-	height: 500px;
+	padding-top:25px;
+	min-height: 550px;
+	padding-bottom:25px;
 
 }
 
@@ -52,8 +64,10 @@ a {
 	color: $link-blue;
 }
 
-#container {
-	width: 100%;
+#wrapper {
+	margin-left:auto;
+	margin-right:auto;
+	width: 80%;
 }
 
 .topics {
@@ -140,20 +154,21 @@ a {
 	}
 
 	input {
+		-webkit-appearance: textfield;
 		clear: both;
 		font-family: "Helvetica Neue", "arial", "sans-serif";
 		font-size: 18px;
 		font-weight: bold;
 		border: 3px solid #C0C0C0;
 		width: 325px;
-		height: 24px;
+		height: 35px;
 		@include border-radius(5px);
 	}
 }
 
 
 
-#footer {
+footer {
 	@include sticky-footer(54px);
 	background: #C0C0C0;
 	color: #555555;

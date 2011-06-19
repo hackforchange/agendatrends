@@ -9,7 +9,8 @@ rules = [
 
 	HandlerPrefix('agendatrends.handlers.', [
 	
-		Rule('/', name='landing', handler='main.Landing')
+		Rule('/', name='landing', handler='main.LandingHandler'),
+		Rule('/topic/<path:filters>', name='topic', handler='main.TopicHandler')
 	
 	])
 ]

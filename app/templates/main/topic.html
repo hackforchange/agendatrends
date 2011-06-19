@@ -1,0 +1,78 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<h3 class="topic">{{ topic }}</h3>
+
+<div id="chart">
+
+</div>
+
+
+{% endblock %}
+
+{% block postsouth %}
+
+<script type="text/javascript">
+	var options = {
+		title: {
+			text: '{{ topic }}'
+        },
+        xAxis: {
+            title: { 
+                text: 'Time'
+            },
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: 'Mentions'
+            },
+        },
+        chart: {
+			renderTo: 'chart',
+            zoomType: 'x',
+			defaultSeriesType: 'area'
+        },
+        series: []
+   };
+
+
+
+	$.getJSON("/static/topics/{{ topic }}/people/obama/people/palin.json", function(data) {
+        console.log(data);
+        $.each(data['people'], function(name, person) {
+            var series = {
+                name: name,
+                data: []
+            };
+            var dates = {};
+
+            for ( var i = 0, len = person.data.length; i < len; ++i ) {
+                var date = person.data[i].date;
+                if ( !(date in dates) ) {
+                    dates[date] = 0;
+                }
+                dates[date]++;
+            }
+
+            $.each(dates, function(key, value) {
+                series.data.push([AgendaTrends.parseDate(key), value]);
+            });
+
+
+            console.log(series);
+
+            options.series.push(series)
+        });
+
+        var chart = new Highcharts.Chart(options);
+
+	});
+
+</script>
+
+
+
+{% endblock %}
+

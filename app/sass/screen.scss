@@ -130,9 +130,9 @@ a {
 #map-and-reps {
 	border: 20px solid #555555;
 	@include border-radius(30px, 30px);
-	width: 450px;
+	width: 600px;
 	height: 450px;
-	margin-left: 15%;
+	margin-left: 50px;
 	float: left;
     position: relative;
 }
@@ -164,7 +164,7 @@ a {
 
 
 #map-viewer {
-    width: 450px;
+    width: 600px;
     height: 450px;
 }
 

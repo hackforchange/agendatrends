@@ -199,9 +199,9 @@ a {
   -ms-border-radius: 30px / 30px;
   -khtml-border-radius: 30px / 30px;
   border-radius: 30px / 30px;
-  width: 450px;
+  width: 600px;
   height: 450px;
-  margin-left: 15%;
+  margin-left: 50px;
   float: left;
   position: relative;
 }
@@ -237,7 +237,7 @@ a {
 
 /* line 166, ../../sass/screen.scss */
 #map-viewer {
-  width: 450px;
+  width: 600px;
   height: 450px;
 }
 

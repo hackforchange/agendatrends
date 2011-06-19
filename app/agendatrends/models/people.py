@@ -1,5 +1,8 @@
 from agendatrends import models as m
 
+from agendatrends.models.geo import USState
+from agendatrends.models.politics import PoliticalParty
+
 
 class Person(m.AGTPolyModel):
 	
@@ -12,12 +15,15 @@ class Person(m.AGTPolyModel):
 	gender = m.db.StringProperty(choices=['M', 'F'])	
 	birthdate = m.db.StringProperty()
 	
+	updated = m.db.DateTimeProperty(auto_now=True)
+	created = m.db.DateTimeProperty(auto_now_add=True)	
+	
 	
 class Legislator(Person):
 	
 	## Political stuff
-	party = m.db.StringProperty()
-	state = m.db.StringProperty()
+	state = m.db.ReferenceProperty(USState, collection_name='legislators')
+	party = m.db.ReferenceProperty(PoliticalParty, collection_name='legislators')	
 	district = m.db.StringProperty()
 	in_office = m.db.BooleanProperty()
 	

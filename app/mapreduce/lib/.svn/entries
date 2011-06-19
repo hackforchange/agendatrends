@@ -1,0 +1,72 @@
+8
+
+dir
+174
+http://appengine-mapreduce.googlecode.com/svn/trunk/python/src/mapreduce/lib
+http://appengine-mapreduce.googlecode.com/svn
+
+
+
+2011-05-19T21:43:20.183374Z
+173
+appengine.mirrorbot@gmail.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+441dd3cb-e453-d85f-364a-b28e0c74875c
+
+files
+dir
+
+simplejson
+dir
+
+key_range
+dir
+
+pipeline
+dir
+
+crc32c.py
+file
+
+
+
+
+2011-06-19T16:04:38.000000Z
+1a938fad7f5f1735a58ff04dedccd4fd
+2011-05-11T16:34:30.342667Z
+171
+mike.aizatsky
+has-props
+
+__init__.py
+file
+
+
+
+
+2011-06-19T16:04:38.000000Z
+88923169eeb50236297c5d685ee8c89d
+2010-07-13T21:14:25.972687Z
+73
+mike.aizatsky
+has-props
+
+graphy
+dir
+
+blobstore
+dir
+

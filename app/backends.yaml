@@ -1,0 +1,4 @@
+backends:
+- name: crawler
+  class: B4
+  instances: 5

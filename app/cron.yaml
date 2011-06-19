@@ -1,0 +1,7 @@
+cron:
+- description: Tags: Occurrence Count
+  url: /_cron/tags/count
+  schedule: every 5 hours
+- description: Tags: Occurrence Sum
+  url: /_cron/tags/sum
+  schedule: every 6 hours

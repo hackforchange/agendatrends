@@ -1,0 +1,8 @@
+mapreduce:
+- name: Tags: Count Occurrences
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: agendatrends.mappers.tags.CountOccurrences
+    params:
+    - name: entity_kind
+      default: Tag

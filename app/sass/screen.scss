@@ -26,6 +26,7 @@ $footer-height: 25px;
 $shadow-color: #CCCCCC;
 
 header {
+
 	h1 {
 		padding-left: 10px;
 		float:left;
@@ -47,6 +48,15 @@ header {
 				display:inline;
 			}
 		}
+	}
+	
+	#currentUser
+	{
+		margin-top:21px;
+		float:right;
+		padding-right: 10px;
+		clear:right;
+		display:inline;
 	}
 
 	@include background-image(linear-gradient(#FFF,#C0C0C0));
@@ -71,7 +81,6 @@ a {
 #wrapper {
 	margin-left:auto;
 	margin-right:auto;
-	width: 80%;
 }
 
 .topics {
@@ -147,8 +156,8 @@ a {
 	float: left;
 	border: 20px solid #555555;
 	@include border-radius(20px, 20px);
-	margin-top: 175px;
-	margin-left: -15px;
+	margin-top: 100px;
+	margin-left: -20px;
 	padding: 25px;
 
 	label {
